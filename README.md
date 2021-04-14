@@ -2,6 +2,8 @@
 
 Use the loading messages from The Sims in your program!
 
+![example](./example.gif)
+
 ---
 
 Want some garbage messages you can add to a loading screen? Congrats 🎉 you've found the right repo!
