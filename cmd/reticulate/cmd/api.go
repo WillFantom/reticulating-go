@@ -56,7 +56,7 @@ func gameRandomMessage(w http.ResponseWriter, r *http.Request) {
 	game := reticulating.GameByName(gameName)
 	if game == nil {
 		logrus.Errorln("⚠️	get game's random message request failed")
-		http.Error(w, "game does not exist", 500)
+		http.Error(w, "game does not exist", 400)
 		return
 	}
 	data := LoadingMessageResponse{
@@ -75,13 +75,13 @@ func packRandomMessage(w http.ResponseWriter, r *http.Request) {
 	game := reticulating.GameByName(vars["game"])
 	if game == nil {
 		logrus.Errorln("⚠️	get game's random message request failed")
-		http.Error(w, "game does not exist", 500)
+		http.Error(w, "game does not exist", 400)
 		return
 	}
 	pack := game.PackByName(vars["pack"])
 	if pack == nil {
 		logrus.Errorln("⚠️	get pack's random message request failed")
-		http.Error(w, "pack does not exist", 500)
+		http.Error(w, "pack does not exist", 400)
 		return
 	}
 	data := LoadingMessageResponse{
