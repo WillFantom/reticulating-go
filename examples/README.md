@@ -15,3 +15,5 @@ See [loading.go](./loading.go)...
 Build: `go build -o loading-go loading.go`
 
 Run: `./loading-go`
+
+![go demo](./go-demo.gif)
