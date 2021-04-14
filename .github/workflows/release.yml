@@ -32,7 +32,6 @@ jobs:
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
           goversion: 1.16
-          ldflags: -X "main.Version=${{ steps.extract_tag.outputs.tag }}"
           binary_name: "reticulate"
 
   release-docker:
