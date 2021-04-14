@@ -3,7 +3,8 @@ module github.com/willfantom/reticulating-go
 go 1.16
 
 require (
-	github.com/gorilla/mux v1.8.0 // indirect
+	github.com/briandowns/spinner v1.12.0
+	github.com/gorilla/mux v1.8.0
 	github.com/hashicorp/go-version v1.3.0
 	github.com/lithammer/fuzzysearch v1.1.1
 	github.com/pterm/pterm v0.12.13
