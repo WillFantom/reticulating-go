@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/briandowns/spinner"
@@ -31,17 +32,20 @@ var rootCmd = &cobra.Command{
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		if !instant {
-			s := spinner.New(spinner.CharSets[34], 50*time.Millisecond)
+			s := spinner.New(spinner.CharSets[11], 50*time.Millisecond, spinner.WithWriter(os.Stderr))
+			s.HideCursor = true
+			s.Color("green", "bold")
+
 			s.Start()
 			wait := time.Millisecond * 100
 			for wait <= time.Second {
-				s.Suffix = fmt.Sprintf("\t%s", reticulating.GetLoadingMessage())
+				s.Suffix = fmt.Sprintf("  %s", reticulating.GetLoadingMessage())
 				time.Sleep(wait)
-				wait = wait + (time.Millisecond * 100)
+				wait = time.Millisecond * time.Duration(int64(float64(wait.Milliseconds())*1.1))
 			}
 			s.Stop()
 		}
-		fmt.Printf("\033[2K\r%s\n", reticulating.GetLoadingMessage())
+		fmt.Println(reticulating.GetLoadingMessage())
 	},
 }
 
