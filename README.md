@@ -16,13 +16,42 @@ curl https://sims.willfantom.com/api/messages/random
 
 See [`examples`](./examples) for more!
 
-## I Wanna Host This Myself...
+---
+
+## Add to Go Program
+
+You can just add this to your golang program:
+
+```bash
+go get github.com/willfantom/reticulating-go
+```
+
+Example:
+```go
+package main
+
+import (
+  "fmt"
+
+  "github.com/willfantom/reticulating-go"
+)
+
+func main() {
+  fmt.Println(reticulating.GetLoadingMessage())
+}
+```
+
+---
+
+## I Wanna Host The API Myself...
 
 Just use the built Docker image 🐳
 
 ```bash
-docker run --rm -p 8080:8080 ghcr.io/willfantom/reticulating-messages:latest
+docker run --rm -p 8080:8080 ghcr.io/willfantom/reticulating:latest
 ```
+
+---
 
 ### TODO
 
