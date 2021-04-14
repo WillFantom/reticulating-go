@@ -6,7 +6,7 @@ If you just want to add some messages to your program quickly (and you know it'l
 
 See [loading.sh](./loading.sh)...
 
-Run: `./loading.sh`
+Run: `./loading.sh "https://sims.willfantom.com"`
 
 ##### GoLang
 
