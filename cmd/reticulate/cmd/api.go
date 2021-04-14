@@ -17,6 +17,12 @@ type LoadingMessageResponse struct {
 	Message  string `json:"message"`
 }
 
+type StatsResponse struct {
+	TotalGames    int `json:"games,omitempty"`
+	TotalPacks    int `json:"packs,omitempty"`
+	TotalMessages int `json:"messages"`
+}
+
 const (
 	pathPrefix string = "/api"
 )
@@ -33,6 +39,7 @@ var apiCmd = &cobra.Command{
 		apiRouter.HandleFunc(pathPrefix+"/messages/random", randomMessage)
 		apiRouter.HandleFunc(pathPrefix+"/messages/{game}/random", gameRandomMessage)
 		apiRouter.HandleFunc(pathPrefix+"/messages/{game}/{pack}/random", packRandomMessage)
+		apiRouter.HandleFunc(pathPrefix+"/stats", stats)
 		logrus.Fatalln(http.ListenAndServe(":"+apiPort, apiRouter))
 	},
 }
@@ -60,7 +67,8 @@ func gameRandomMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	data := LoadingMessageResponse{
-		Message: game.GetRandomMessage(),
+		BaseGame: game.Name,
+		Message:  game.GetRandomMessage(),
 	}
 	if err := json.NewEncoder(w).Encode(data); err != nil {
 		logrus.Errorln("⚠️	get game's random message request failed")
@@ -85,10 +93,25 @@ func packRandomMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	data := LoadingMessageResponse{
-		Message: pack.GetRandomMessage(),
+		BaseGame: game.Name,
+		SubGame:  pack.Name,
+		Message:  pack.GetRandomMessage(),
 	}
 	if err := json.NewEncoder(w).Encode(data); err != nil {
 		logrus.Errorln("⚠️	get pack's random message request failed")
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}
+
+func stats(w http.ResponseWriter, r *http.Request) {
+	data := StatsResponse{
+		TotalGames:    reticulating.GameCount(),
+		TotalPacks:    reticulating.PackCount(),
+		TotalMessages: reticulating.MessageCount(),
+	}
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		logrus.Errorln("⚠️	stats request failed")
 		http.Error(w, err.Error(), 500)
 		return
 	}

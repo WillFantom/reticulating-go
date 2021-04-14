@@ -33,3 +33,26 @@ func GetPacksNameList(game *Game) []string {
 	}
 	return packNames
 }
+
+func GameCount() int {
+	return len(data)
+}
+
+func PackCount() int {
+	count := 0
+	for _, game := range data {
+		count += len(game.Packs)
+	}
+	return count
+}
+
+func MessageCount() int {
+	count := 0
+	for _, game := range data {
+		for _, pack := range game.Packs {
+			count += len(pack.Messages)
+		}
+		count += len(game.Packs)
+	}
+	return count
+}
