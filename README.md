@@ -1,5 +1,7 @@
 # Reticulating Loading Messages...
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/willfantom/reticulating-go/Publish%20Rolling%20Release) ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/willfantom/reticulating-go) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/willfantom/reticulating-go?sort=semver)
+
 Use the loading messages from The Sims in your program!
 
 ![example](./example.gif)
@@ -10,13 +12,24 @@ Want some garbage messages you can add to a loading screen? Congrats 🎉 you've
 
 ## I Just Want Messages!
 
-It can be as simple as a `cURL`!
+  1. Use the CLI tool (that can also run the API) on MacOS
+     ```bash
+      brew tap willfantom/reticulate
+      brew install reticulate
+      reticulate --help
+     ```
 
-```bash
-curl https://sims.willfantom.com/api/messages/random
-```
+  2. It can be as simple as a `cURL`!
+      ```bash
+      # From any game
+      curl https://sims.willfantom.com/api/messages/random
+      # From just the sims 2
+      curl https://sims.willfantom.com/api/messages/sims2/random
+      # From just the sims 2 university life
+      curl https://sims.willfantom.com/api/messages/sims2/university/random
+      ```
 
-See [`examples`](./examples) for more!
+See [`examples`](./examples) for more uses!
 
 ---
 
@@ -51,6 +64,12 @@ Just use the built Docker image 🐳
 
 ```bash
 docker run --rm -p 8080:8080 ghcr.io/willfantom/reticulating:latest
+```
+
+Or the CLI tool
+
+```bash
+reticulate api --port 8080
 ```
 
 ---
